@@ -1,38 +1,13 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import pickle
-import numpy as np
 import ijson
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import style
-style.use("ggplot")
+style.use("seaborn-paper")
 
-filename = "D:\\Stuur\\mpcorb_10kasteroids.json"
-# filename = "D:\\Stuur\\mpcorb_extended.json"
 
-columns_i_want = ["a", "e", "i"]
-asteroid_data = []
-
-with open(filename, 'r') as f:
-    objects = ijson.items(f, 'item')
-    for row in objects:
-    	selected_row = dict()
-    	selected_row = {"a": float(row["a"]), "e": float(row["e"]), "i": float(row["i"])}
-    	asteroid_data.append(selected_row)
-
-# print(asteroid_data)
-asteroid_df = pd.DataFrame.from_dict(asteroid_data)
-# print(asteroid_df)
-print(asteroid_df.describe())
-
-# pickle_out = open('asteroids_aei.pickle', 'wb')
-# pickle.dump(asteroid_df, pickle_out)
-# pickle_out.close()
-
-# asteroid_df = pd.read_pickle('asteroids_aei.pickle')
-# print(asteroid_df.a.describe())
-# print(asteroid_df.e.describe())
-
+asteroid_df = pd.read_pickle('asteroids10K_aei.pickle')
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
